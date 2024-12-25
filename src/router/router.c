@@ -1,8 +1,11 @@
-#include "../include/external/microhttpd.h"
+#include <stdio.h>
+#include <string.h>
+#include "microhttpd.h"
+#include "handlers/handlers.h"
 
 #define PORT 8888
 
-static int answer_to_request(
+static enum MHD_Result answer_to_request(
     void *cls, 
     struct MHD_Connection *connection,                         
     const char *url, 
@@ -12,25 +15,22 @@ static int answer_to_request(
     size_t *upload_data_size, 
     void **con_cls ) {
     
-    const char *page = "<html><body>Hello, World!</body></html>";
+    if ((strcmp(url, "/ping") == 0) && (strcmp(method, "GET") == 0)) {
+        return handle_ping(cls, connection);
+    }
     
-    struct MHD_Response *response;
-    int ret;
+    const char *response_text = "<html><body>404 Not Found</body></html>";
 
-    response = MHD_create_response_from_buffer(
-                    strlen(page), 
-                    (void *)page,
-                    MHD_RESPMEM_PERSISTENT
-                );
-    
-    ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+    struct MHD_Response *response;
+    response = MHD_create_response_from_buffer(strlen(response_text), (void *)response_text, MHD_RESPMEM_PERSISTENT);
+    int ret = MHD_queue_response(connection, MHD_HTTP_NOT_FOUND, response);
     
     MHD_destroy_response(response);
     
     return ret;
 }
 
-int main() {
+int server() {
     
     struct MHD_Daemon *daemon;
 

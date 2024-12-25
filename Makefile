@@ -12,8 +12,6 @@ TARGET = app
 INCLUDE_DIR = include/external
 LIB_DIR = lib
 
-
-
 # Default target
 all: $(TARGET)
 
@@ -79,4 +77,20 @@ run: $(TARGET)
 .PHONY: all clean lib-install rebuild run
 
 gbuild:
-	gcc -o $(TARGET) src/main.c src/db/postgres.c -Iinclude/external -Llib -lpq
+	gcc -o $(TARGET) \
+	src/main.c \
+	src/db/postgres.c \
+	src/router/router.c \
+	src/router/handlers/handlers.c \
+	-Iinclude/external -Llib -lpq -lmicrohttpd
+
+cbuild:
+	clang -o $(TARGET) \
+	src/main.c \
+	src/db/postgres.c \
+	src/router/router.c \
+	src/router/handlers/handlers.c \
+	-Iinclude/external -Llib -lpq -lmicrohttpd
+
+gclean:
+	rm -f $(OBJ) $(TARGET)
