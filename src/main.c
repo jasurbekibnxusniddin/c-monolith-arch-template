@@ -2,11 +2,11 @@
 #include "router/router.h"
 
 int main() {
-    PGconn *conn =connect();
+    //PGconn *conn =connect();
 
     server();
-    printf("Connection: %p\n", conn);
+    //printf("Connection: %p\n", conn);
 
-    PQfinish(conn);
+  //  PQfinish(conn);
     return 0;
 }
