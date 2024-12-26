@@ -1,12 +1,12 @@
 #include "db/postgres.h"
-#include "router/router.h"
+#include "server/server.h"
 
 int main() {
-    //PGconn *conn =connect();
+    PGconn *conn = pg_connect(); 
 
     server();
-    //printf("Connection: %p\n", conn);
+    printf("Connection: %p\n", conn);
 
-  //  PQfinish(conn);
+    PQfinish(conn);
     return 0;
 }

@@ -3,6 +3,6 @@
 
 #include <libpq-fe.h>
 
-PGconn* connect();
+PGconn* pg_connect();
 
 #endif

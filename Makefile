@@ -85,11 +85,11 @@ gbuild:
 	-Iinclude/external -Llib -lpq -lmicrohttpd
 
 cbuild:
-	clang -o $(TARGET) \
+	clang -v -o $(TARGET) \
 	src/main.c \
 	src/db/postgres.c \
 	src/router/router.c \
-	src/router/handlers/handlers.c \
+	src/handlers/handlers.c \
 	-Iinclude/external -Llib -lpq -lmicrohttpd
 
 gclean:

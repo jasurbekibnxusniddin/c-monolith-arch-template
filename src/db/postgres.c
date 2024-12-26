@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <libpq-fe.h>
 
-PGconn* connect() {
+PGconn* pg_connect() {
     
     PGconn *conn = PQconnectdb("user=postgres dbname=postgres password=postgres");
 

@@ -63,3 +63,4 @@
     ├── server.conf           # Server configuration file (port, debug mode)
     ├── database.conf         # Database connection settings
     └── auth.conf             # Authentication settings (e.g., JWT secret)
+
